@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "577846987968",
+    "firebase_url": "https://fir-test-3fdf6.firebaseio.com",
+    "project_id": "fir-test-3fdf6",
+    "storage_bucket": "fir-test-3fdf6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:577846987968:android:431ae7b35782039e",
+        "android_client_info": {
+          "package_name": "com.cinemacar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "577846987968-btpujki365fclu64nkt75gf5shfhtofo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0OxwZRrncwVDWmTjF-1QGe2Klx6l-AHE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "577846987968-btpujki365fclu64nkt75gf5shfhtofo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
