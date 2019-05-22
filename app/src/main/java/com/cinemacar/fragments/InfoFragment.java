@@ -20,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -42,15 +43,15 @@ public class InfoFragment extends Fragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_info, container, false);
-		mRecyclerView = rootView.findViewById(R.id.fights_recycler);
+		mRecyclerView = rootView.findViewById(R.id.films_recycler);
 		mRecyclerView.setHasFixedSize(true);
 		myRef.addValueEventListener(new ValueEventListener() {
 			@Override
 			public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-				GenericTypeIndicator<List<Film>> genericTypeIndicator = new GenericTypeIndicator<List<Film>>() {
+				GenericTypeIndicator<HashMap<String,List<Film>>> genericTypeIndicator = new GenericTypeIndicator<HashMap<String,List<Film>>>() {
 				};
-				List<Film> pointList = dataSnapshot.getValue(genericTypeIndicator);
-				adapter = new Adapter(pointList);
+				HashMap<String, List<Film>> value = dataSnapshot.getValue(genericTypeIndicator);
+				adapter = new Adapter(value.get("films"));
 				RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
 				mRecyclerView.setLayoutManager(layoutManager);
 				mRecyclerView.setAdapter(adapter);

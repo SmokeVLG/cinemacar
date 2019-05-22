@@ -3,4 +3,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_mock_text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, incidunt.</string>
+    <string name="number_raw">1.</string>
+    <string name="description_mock_text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae cum earum, itaque laboriosam natus quas quis quod temporibus totam unde. Atque dolor dolorem enim impedit molestias nemo porro rem voluptatum!</string>
+
 </resources>
