@@ -23,8 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.HashMap;
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * A fragment that launches other parts of the demo application.
@@ -59,12 +58,14 @@ public class ListFilmFragment extends Fragment {
 		myRef.addValueEventListener(new ValueEventListener() {
 			@Override
 			public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-				GenericTypeIndicator<HashMap<String,List<Film>>> genericTypeIndicator = new GenericTypeIndicator<HashMap<String,List<Film>>>() {
+				GenericTypeIndicator<ArrayList<Film>> genericTypeIndicator = new GenericTypeIndicator<ArrayList<Film>>() {
 				};
-				HashMap<String, List<Film>> value = dataSnapshot.getValue(genericTypeIndicator);
-				List<Film> films = value.get("films");
+				ArrayList<Film> films = dataSnapshot.getValue(genericTypeIndicator);
+				//dataSnapshot.getValue(ArrayList);
+				//List<Film> films = films.get("films");
+				//List<Film> films = films;
 				FilmList.getInstance().setWorkouts(films);
-				adapter = new Adapter(films,listener);
+				adapter = new Adapter(films, listener);
 				RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
 				mRecyclerView.setLayoutManager(layoutManager);
 				mRecyclerView.setAdapter(adapter);
