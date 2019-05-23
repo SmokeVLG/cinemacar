@@ -12,10 +12,10 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        goToMap();
+        goToListFilm();
     }
 
-    private void goToMap() {
+    private void goToListFilm() {
         startActivity(new Intent(this, MainActivity.class));
         this.finish();
     }

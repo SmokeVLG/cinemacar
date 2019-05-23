@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cinemacar.R;
+import com.cinemacar.interfaces.OnFilmClickListener;
 import com.cinemacar.pojo.Film;
 import com.cinemacar.pojo.Time;
 import com.squareup.picasso.Picasso;
@@ -20,11 +21,12 @@ import java.util.List;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.FilterViewHolder> {
 	private List<Film> films = new ArrayList<>();
+	private OnFilmClickListener itemClickListener;
 
 	class FilterViewHolder extends RecyclerView.ViewHolder {
 		RelativeLayout rV;
-		//TextView numberRaw;
-		TextView placeName;
+		TextView dayText;
+		LinearLayout ll_first_film;
 		TextView firstFilmTime;
 		TextView firstFilmDescription;
 		ImageView firstFilmImage;
@@ -38,11 +40,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.FilterViewHolder> {
 		FilterViewHolder(View itemView) {
 			super(itemView);
 			rV = itemView.findViewById(R.id.r_l);
-			//numberRaw = itemView.findViewById(R.id.number_raw);
-			placeName = itemView.findViewById(R.id.film_date);
+			dayText = itemView.findViewById(R.id.day_text);
+			ll_first_film = itemView.findViewById(R.id.ll_first_film);
 			firstFilmDescription = itemView.findViewById(R.id.first_film_description);
 			firstFilmTime = itemView.findViewById(R.id.first_film_time);
 			firstFilmImage = itemView.findViewById(R.id.first_film_image);
+
 
 			secondFilmDescription = itemView.findViewById(R.id.second_film_description);
 			secondFilmTime = itemView.findViewById(R.id.second_film_time);
@@ -52,8 +55,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.FilterViewHolder> {
 		}
 	}
 
-	public Adapter(List<Film> films) {
+	public Adapter(List<Film> films, OnFilmClickListener itemClickListener) {
 		this.films = films;
+		this.itemClickListener = itemClickListener;
 	}
 
 
@@ -66,12 +70,10 @@ public class Adapter extends RecyclerView.Adapter<Adapter.FilterViewHolder> {
 	}
 
 	@Override
-	public void onBindViewHolder(@NonNull final FilterViewHolder holder, int position) {
+	public void onBindViewHolder(@NonNull final FilterViewHolder holder, final int position) {
 		final Film currentItem = films.get(position);
 
-		String number = (position + 1) + ".";
-		//holder.numberRaw.setText(number);
-		holder.placeName.setText(currentItem.getDate());
+		holder.dayText.setText(currentItem.getDate());
 
 		List<Time> times = currentItem.getTimes();
 
@@ -83,6 +85,14 @@ public class Adapter extends RecyclerView.Adapter<Adapter.FilterViewHolder> {
 					.load(times.get(0).getPic())
 					.fit()
 					.into(holder.firstFilmImage);
+
+			holder.ll_first_film.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					itemClickListener.onListItemClickListener(position, 0);
+				}
+			});
+
 		}
 
 		if (times.size() == 2) {
@@ -95,6 +105,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.FilterViewHolder> {
 					.load(times.get(0).getPic())
 					.fit()
 					.into(holder.firstFilmImage);
+			holder.ll_first_film.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					itemClickListener.onListItemClickListener(position, 0);
+				}
+			});
 
 
 			holder.secondFilmDescription.setText(times.get(1).getDescription());
@@ -104,20 +120,15 @@ public class Adapter extends RecyclerView.Adapter<Adapter.FilterViewHolder> {
 					.load(times.get(1).getPic())
 					.fit()
 					.into(holder.secondFilmImage);
-
+			holder.ll_second_film.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					itemClickListener.onListItemClickListener(position, 1);
+				}
+			});
 
 
 		}
-		//for (Time curTime:times) {
-
-		//}
-
-		/*holder.firstFilmDescription.setText(currentItem.getDescription());
-		Picasso
-				.get()
-				.load(currentItem.getPic())
-				.fit()
-				.into(holder.firstFilmImage);*/
 
 	}
 

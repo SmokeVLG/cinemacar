@@ -1,5 +1,6 @@
 package com.cinemacar.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,8 @@ import android.view.ViewGroup;
 
 import com.cinemacar.R;
 import com.cinemacar.adapters.Adapter;
+import com.cinemacar.interfaces.OnFilmClickListener;
+import com.cinemacar.model.FilmList;
 import com.cinemacar.pojo.Film;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,12 +29,20 @@ import java.util.List;
 /**
  * A fragment that launches other parts of the demo application.
  */
-public class InfoFragment extends Fragment {
+public class ListFilmFragment extends Fragment {
 	private Adapter adapter;
 	private RecyclerView mRecyclerView;
-	private String TAG = InfoFragment.class.getSimpleName();
+	private String TAG = ListFilmFragment.class.getSimpleName();
 	private DatabaseReference myRef;
+	private OnFilmClickListener listener;
 
+	@Override
+	public void onAttach(Context context) {
+		if (context instanceof OnFilmClickListener) {
+			listener = (OnFilmClickListener) context;
+		}
+		super.onAttach(context);
+	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -51,7 +62,9 @@ public class InfoFragment extends Fragment {
 				GenericTypeIndicator<HashMap<String,List<Film>>> genericTypeIndicator = new GenericTypeIndicator<HashMap<String,List<Film>>>() {
 				};
 				HashMap<String, List<Film>> value = dataSnapshot.getValue(genericTypeIndicator);
-				adapter = new Adapter(value.get("films"));
+				List<Film> films = value.get("films");
+				FilmList.getInstance().setWorkouts(films);
+				adapter = new Adapter(films,listener);
 				RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
 				mRecyclerView.setLayoutManager(layoutManager);
 				mRecyclerView.setAdapter(adapter);
