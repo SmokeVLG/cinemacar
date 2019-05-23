@@ -1,10 +1,21 @@
 package com.cinemacar.pojo;
 
+import java.util.List;
+
 public class Film {
 
 	private String date;
-	private String description;
-	private String pic;
+	private List<Time> times;
+
+	public List<Time> getTimes() {
+		return times;
+	}
+
+	public void setTimes(List<Time> times) {
+		this.times = times;
+	}
+	//private String description;
+	//private String pic;
 
 	public String getDate() {
 		return date;
@@ -14,7 +25,7 @@ public class Film {
 		this.date = date;
 	}
 
-	public String getDescription() {
+	/*public String getDescription() {
 		return description;
 	}
 
@@ -28,5 +39,5 @@ public class Film {
 
 	public void setPic(String pic) {
 		this.pic = pic;
-	}
+	}*/
 }

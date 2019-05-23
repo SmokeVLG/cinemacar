@@ -12,11 +12,6 @@
         android:layout_height="match_parent"
         android:layout_margin="4dp">
 
-        <ImageView
-            android:id="@+id/film_image"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
-            android:contentDescription="TODO" />
 
         <TextView
             android:id="@+id/film_date"
@@ -25,21 +20,83 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="4dp"
-            android:layout_toEndOf="@+id/film_image"
+
             android:text="@string/title_mock_text"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="16sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/film_description"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:id="@+id/ll_first_film"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/film_date"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:layout_toEndOf="@+id/film_image"
-            android:text="@string/description_mock_text" />
+            android:layout_marginTop="1dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/first_film_image"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:contentDescription="TODO" />
+
+            <TextView
+                android:id="@+id/first_film_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:text="21:00"
+                android:textColor="@color/colorPrimaryDark" />
+
+            <TextView
+                android:id="@+id/first_film_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:text="@string/description_mock_text" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_second_film"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_first_film"
+            android:layout_marginTop="1dp"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/second_film_image"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:contentDescription="TODO" />
+
+            <TextView
+                android:id="@+id/second_film_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:text="21:00"
+                android:textColor="@color/colorPrimaryDark" />
+
+            <TextView
+                android:id="@+id/second_film_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:text="@string/description_mock_text" />
+
+        </LinearLayout>
 
 
     </RelativeLayout>

@@ -5,4 +5,6 @@
     <color name="colorAccent">#D81B60</color>
     <color name="background_chips">#4fc3f7</color>
     <color name="white">#ffffff</color>
+    <color name="md__transparent">#00000000</color>
+    <color name="black">#000000</color>
 </resources>
