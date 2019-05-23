@@ -5,6 +5,7 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +45,6 @@ public class VideoFragment extends Fragment {
 		//String uri = "android.resource://" + getActivity().getPackageName() + "/" + R.raw.msr_third_video;
 		//String uri = "https://www.youtube.com/watch?v=EfgUMoJrWIE&t=608s";
 		String uri = getArguments().getString(VIDEO_URL);
-
 		if (videoView != null) {
 			videoView.setVideoURI(Uri.parse(uri));
 			videoView.seekTo(1000);
@@ -54,10 +54,13 @@ public class VideoFragment extends Fragment {
 					mp.setOnInfoListener(new MediaPlayer.OnInfoListener() {
 						@Override
 						public boolean onInfo(MediaPlayer mp, int what, int extra) {
-							if (what == MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START) {
+							Log.e(VideoFragment.class.getSimpleName(), "what " + what);
+							if (what == MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START || what == MediaPlayer.MEDIA_INFO_BUFFERING_END) {
+								Log.e(VideoFragment.class.getSimpleName(), "start");
 								videoView.start();
 								return true;
 							}
+							Log.e(VideoFragment.class.getSimpleName(), "false");
 							return false;
 						}
 					});
