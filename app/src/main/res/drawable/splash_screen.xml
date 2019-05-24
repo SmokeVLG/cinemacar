@@ -2,10 +2,12 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:drawable="@android:color/white" />
-    <item>
-        <bitmap
-            android:gravity="center"
-            android:src="@drawable/car"/>
-    </item>
+    <item
+        android:bottom="24dp"
+        android:drawable="@drawable/ic_car"
+        android:gravity="center"
+        android:left="24dp"
+        android:right="24dp"
+        android:top="24dp" />
 
 </layer-list>
