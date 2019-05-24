@@ -5,6 +5,7 @@ import java.util.List;
 public class Film {
 
 	private String date;
+	private String place;
 	private List<Time> times;
 
 	public List<Time> getTimes() {
@@ -14,8 +15,7 @@ public class Film {
 	public void setTimes(List<Time> times) {
 		this.times = times;
 	}
-	//private String description;
-	//private String pic;
+
 
 	public String getDate() {
 		return date;
@@ -25,19 +25,11 @@ public class Film {
 		this.date = date;
 	}
 
-	/*public String getDescription() {
-		return description;
+	public String getPlace() {
+		return place;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setPlace(String place) {
+		this.place = place;
 	}
-
-	public String getPic() {
-		return pic;
-	}
-
-	public void setPic(String pic) {
-		this.pic = pic;
-	}*/
 }

@@ -30,10 +30,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.FilterViewHolder> {
 		TextView firstFilmTime;
 		TextView firstFilmDescription;
 		ImageView firstFilmImage;
+		TextView firstFilmPlace;
 
 		TextView secondFilmTime;
 		TextView secondFilmDescription;
 		ImageView secondFilmImage;
+		TextView secondFilmPlace;
 
 		LinearLayout ll_second_film;
 
@@ -45,11 +47,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.FilterViewHolder> {
 			firstFilmDescription = itemView.findViewById(R.id.first_film_description);
 			firstFilmTime = itemView.findViewById(R.id.first_film_time);
 			firstFilmImage = itemView.findViewById(R.id.first_film_image);
+			firstFilmPlace = itemView.findViewById(R.id.first_film_place);
 
 
 			secondFilmDescription = itemView.findViewById(R.id.second_film_description);
 			secondFilmTime = itemView.findViewById(R.id.second_film_time);
 			secondFilmImage = itemView.findViewById(R.id.second_film_image);
+			secondFilmPlace = itemView.findViewById(R.id.second_film_place);
 
 			ll_second_film = itemView.findViewById(R.id.ll_second_film);
 		}
@@ -93,6 +97,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.FilterViewHolder> {
 				}
 			});
 
+			holder.firstFilmPlace.setText(currentItem.getPlace());
+
 		}
 
 		if (times.size() == 2) {
@@ -111,7 +117,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.FilterViewHolder> {
 					itemClickListener.onListItemClickListener(position, 0);
 				}
 			});
-
+			holder.firstFilmPlace.setText(currentItem.getPlace());
 
 			holder.secondFilmDescription.setText(times.get(1).getDescription());
 			holder.secondFilmTime.setText(times.get(1).getTime());
@@ -126,6 +132,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.FilterViewHolder> {
 					itemClickListener.onListItemClickListener(position, 1);
 				}
 			});
+			holder.secondFilmPlace.setText(currentItem.getPlace());
 
 
 		}

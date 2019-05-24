@@ -51,14 +51,29 @@
                 android:text="21:00"
                 android:textColor="@color/colorPrimaryDark" />
 
-            <TextView
-                android:id="@+id/first_film_description"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="4dp"
-                android:text="@string/description_mock_text" />
+                android:orientation="vertical">
 
+                <TextView
+                    android:id="@+id/first_film_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/description_mock_text" />
+
+                <TextView
+                    android:id="@+id/first_film_place"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/description_mock_text2"
+                    android:textStyle="bold|italic" />
+
+            </LinearLayout>
         </LinearLayout>
 
 
@@ -88,13 +103,32 @@
                 android:text="21:00"
                 android:textColor="@color/colorPrimaryDark" />
 
-            <TextView
-                android:id="@+id/second_film_description"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="4dp"
-                android:text="@string/description_mock_text" />
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/second_film_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/description_mock_text" />
+
+
+                <TextView
+                    android:id="@+id/second_film_place"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/description_mock_text2"
+                    android:textStyle="bold|italic" />
+
+
+            </LinearLayout>
+
 
         </LinearLayout>
 
