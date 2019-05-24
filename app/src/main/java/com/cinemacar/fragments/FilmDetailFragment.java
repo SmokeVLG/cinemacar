@@ -47,32 +47,36 @@ public class FilmDetailFragment extends Fragment {
 		return root;
 	}
 
-	private void initGUI(View view, final Film workout) {
+	private void initGUI(View view, final Film currentFilm) {
 		((AppCompatActivity) getActivity()).getSupportActionBar().show();
 		TextView filmName = view.findViewById(R.id.film_name);
 		TextView filmTime = view.findViewById(R.id.film_time);
 		TextView filmDescription = view.findViewById(R.id.film_description);
 		ImageView filmImage = view.findViewById(R.id.film_image);
-		Picasso.get().load(workout.getTimes().get(numberFilm).getPic()).fit().into(filmImage);
-		((MainActivity) getActivity()).getSupportActionBar().setTitle(workout.getTimes().get(numberFilm).getName());
-		filmName.setText(workout.getTimes().get(numberFilm).getName());
-		filmDescription.setText(workout.getTimes().get(numberFilm).getTime());
-		filmTime.setText(workout.getTimes().get(numberFilm).getDescription());
+		Picasso.get().load(currentFilm.getTimes().get(numberFilm).getPic()).fit().into(filmImage);
+		((MainActivity) getActivity()).getSupportActionBar().setTitle(currentFilm.getTimes().get(numberFilm).getName());
+		filmName.setText(currentFilm.getTimes().get(numberFilm).getName());
+		filmDescription.setText(currentFilm.getTimes().get(numberFilm).getTime());
+		filmTime.setText(currentFilm.getTimes().get(numberFilm).getDescription());
 		filmImage.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				FragmentTransaction fragmentTransaction = getFragmentManager()
-						.beginTransaction();
-				VideoFragment videoFragment = new VideoFragment();
-				Bundle args = new Bundle();
-				args.putString(VideoFragment.VIDEO_URL, workout.getTimes().get(numberFilm).getVideo());
-				videoFragment.setArguments(args);
-				fragmentTransaction.replace(R.id.container, videoFragment);
-				fragmentTransaction.addToBackStack(null);
-				fragmentTransaction.commit();
+				openVideo(currentFilm);
 			}
 		});
 
+	}
+
+	private void openVideo(Film currentFilm) {
+		FragmentTransaction fragmentTransaction = getFragmentManager()
+				.beginTransaction();
+		VideoFragment videoFragment = new VideoFragment();
+		Bundle args = new Bundle();
+		args.putString(VideoFragment.VIDEO_URL, currentFilm.getTimes().get(numberFilm).getVideo());
+		videoFragment.setArguments(args);
+		fragmentTransaction.replace(R.id.container, videoFragment);
+		fragmentTransaction.addToBackStack(null);
+		fragmentTransaction.commit();
 	}
 
 

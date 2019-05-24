@@ -31,7 +31,7 @@
                 android:textStyle="bold" />
 
             <android.support.v7.widget.CardView
-                android:id="@+id/ll_first_film"
+                android:id="@+id/cv_first_film"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/day_text"
@@ -73,17 +73,18 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
-                            android:layout_marginTop="4dp" />
+                            android:layout_marginTop="4dp"
+                            android:layout_marginBottom="4dp" />
                     </LinearLayout>
 
                     <TextView
                         android:id="@+id/first_film_time"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="4dp"
+                        android:layout_marginStart="4dp"
                         android:layout_marginTop="4dp"
-                        android:layout_marginRight="8dp"
-                        android:layout_weight="0.1"
+                        android:layout_marginEnd="8dp"
+                        android:layout_weight="0.15"
                         android:textColor="@android:color/black" />
 
                 </LinearLayout>
@@ -92,10 +93,10 @@
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
-                android:id="@+id/ll_second_film"
+                android:id="@+id/cv_second_film"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/ll_first_film"
+                android:layout_below="@+id/cv_first_film"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:visibility="gone"
@@ -134,7 +135,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
-                            android:layout_marginTop="4dp" />
+                            android:layout_marginTop="4dp"
+                            android:layout_marginBottom="4dp" />
 
                     </LinearLayout>
 
@@ -142,10 +144,10 @@
                         android:id="@+id/second_film_time"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="4dp"
+                        android:layout_marginStart="4dp"
                         android:layout_marginTop="4dp"
-                        android:layout_marginRight="8dp"
-                        android:layout_weight="0.1"
+                        android:layout_marginEnd="8dp"
+                        android:layout_weight="0.15"
                         android:textColor="@android:color/black" />
 
                 </LinearLayout>

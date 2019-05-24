@@ -11,8 +11,13 @@ import android.view.Window;
 import com.cinemacar.R;
 import com.cinemacar.fragments.FilmDetailFragment;
 import com.cinemacar.fragments.ListFilmFragment;
+import com.cinemacar.fragments.VideoFragment;
 import com.cinemacar.interfaces.ActivityInterface;
 import com.cinemacar.interfaces.OnFilmClickListener;
+import com.cinemacar.model.FilmList;
+import com.cinemacar.pojo.Film;
+
+import static com.cinemacar.fragments.FilmDetailFragment.numberFilm;
 
 
 public class MainActivity extends AppCompatActivity implements OnFilmClickListener, ActivityInterface {
@@ -58,12 +63,22 @@ public class MainActivity extends AppCompatActivity implements OnFilmClickListen
 
 	@Override
 	public void onListItemClickListener(int index, int numberFilm) {
-		FilmDetailFragment detailFragment = FilmDetailFragment.initFragment(index, numberFilm);
-		fragmentManager.beginTransaction().replace(R.id.container, detailFragment).addToBackStack(null).commit();
+		Film curFilm = FilmList.getInstance().getWorkouts().get(index);
+		openVideo(curFilm);
 	}
 
 	@Override
 	public void isShowToolBar(int visibility) {
-//        toolBar.setVisibility(visibility);
+	}
+
+	private void openVideo(Film currentFilm) {
+		VideoFragment videoFragment = new VideoFragment();
+		Bundle args = new Bundle();
+		args.putString(VideoFragment.VIDEO_URL, currentFilm.getTimes().get(numberFilm).getVideo());
+		videoFragment.setArguments(args);
+		FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+		fragmentTransaction.replace(R.id.container, videoFragment);
+		fragmentTransaction.addToBackStack(null);
+		fragmentTransaction.commit();
 	}
 }
