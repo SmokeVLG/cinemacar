@@ -100,7 +100,7 @@ public class ListFilmFragment extends Fragment implements FilmsListInterface {
 							};
 					ArrayList<Film> films = dataSnapshot.getValue(genericTypeIndicator);
 					if (films.size() > 0) {
-						FilmList.getInstance().setWorkouts(films);
+						FilmList.getInstance().setFilms(films);
 						adapter = new Adapter(films, listener);
 						success(adapter);
 					} else {

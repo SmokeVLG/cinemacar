@@ -9,7 +9,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Window;
 
 import com.cinemacar.R;
-import com.cinemacar.fragments.FilmDetailFragment;
 import com.cinemacar.fragments.ListFilmFragment;
 import com.cinemacar.fragments.VideoFragment;
 import com.cinemacar.interfaces.ActivityInterface;
@@ -63,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements OnFilmClickListen
 
 	@Override
 	public void onListItemClickListener(int index, int numberFilm) {
-		Film curFilm = FilmList.getInstance().getWorkouts().get(index);
+		Film curFilm = FilmList.getInstance().getFilms().get(index);
 		openVideo(curFilm);
 	}
 

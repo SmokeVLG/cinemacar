@@ -42,7 +42,7 @@ public class FilmDetailFragment extends Fragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View root = inflater.inflate(R.layout.fragment_film_detail, container, false);
-		Film workout = FilmList.getInstance().getWorkouts().get(getArguments().getInt(FILM_INDEX));
+		Film workout = FilmList.getInstance().getFilms().get(getArguments().getInt(FILM_INDEX));
 		initGUI(root, workout);
 		return root;
 	}

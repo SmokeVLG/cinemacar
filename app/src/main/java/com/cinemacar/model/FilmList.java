@@ -10,18 +10,18 @@ import java.util.List;
 
 public class FilmList {
 	private static final FilmList ourInstance = new FilmList();
-	private List<Film> workouts;
+	private List<Film> films;
 
 	public static FilmList getInstance() {
 		return ourInstance;
 	}
 
 
-	public List<Film> getWorkouts() {
-		return workouts;
+	public List<Film> getFilms() {
+		return films;
 	}
 
-	public void setWorkouts(List<Film> films) {
-		this.workouts = films;
+	public void setFilms(List<Film> films) {
+		this.films = films;
 	}
 }

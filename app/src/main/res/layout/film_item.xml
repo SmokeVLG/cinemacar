@@ -36,6 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/day_text"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 app:cardCornerRadius="0dp"
                 app:cardElevation="2dp">
 
@@ -54,7 +55,7 @@
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="0.7"
                         android:orientation="vertical">
 
