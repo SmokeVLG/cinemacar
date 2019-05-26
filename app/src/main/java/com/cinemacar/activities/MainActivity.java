@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Window;
+import android.view.WindowManager;
 
 import com.cinemacar.R;
 import com.cinemacar.fragments.ListFilmFragment;
@@ -29,6 +30,8 @@ public class MainActivity extends AppCompatActivity implements OnFilmClickListen
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE); //will hide the title
+		//Remove notification bar
+		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_main);
 		toolBar = findViewById(R.id.tool_bar);
 		setSupportActionBar(toolBar);
