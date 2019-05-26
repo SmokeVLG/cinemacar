@@ -1,5 +1,6 @@
 package com.cinemacar.activities;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -65,8 +66,9 @@ public class MainActivity extends AppCompatActivity implements OnFilmClickListen
 
 	@Override
 	public void onListItemClickListener(int index, int numberFilm) {
-		Film curFilm = FilmList.getInstance().getFilms().get(index);
-		openVideo(curFilm);
+		//Film curFilm = FilmList.getInstance().getFilms().get(index);
+		//setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		//openVideo(curFilm);
 	}
 
 	@Override

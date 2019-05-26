@@ -7,10 +7,13 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.VideoView;
 
 import com.cinemacar.R;
@@ -55,6 +58,43 @@ public class VideoFragment extends Fragment {
 			videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
 				@Override
 				public void onPrepared(MediaPlayer mp) {
+					//Get your video's width and height
+					int videoWidth = mp.getVideoWidth();
+					int videoHeight = mp.getVideoHeight();
+
+					//Get VideoView's current width and height
+					int videoViewWidth = videoView.getWidth();
+					int videoViewHeight = videoView.getHeight();
+
+					float xScale = (float) videoViewWidth / videoWidth;
+					float yScale = (float) videoViewHeight / videoHeight;
+
+					//For Center Crop use the Math.max to calculate the scale
+					//float scale = Math.max(xScale, yScale);
+					//For Center Inside use the Math.min scale.
+					//I prefer Center Inside so I am using Math.min
+					float scale = Math.min(xScale, yScale);
+
+					float scaledWidth = scale * videoWidth;
+					float scaledHeight = scale * videoHeight;
+
+					//Set the new size for the VideoView based on the dimensions of the video
+					ViewGroup.LayoutParams layoutParams = videoView.getLayoutParams();
+					layoutParams.width = (int)scaledWidth;
+					layoutParams.height = (int)scaledHeight;
+					videoView.setLayoutParams(layoutParams);
+
+					/*Display display = getActivity().getWindowManager().getDefaultDisplay();
+					int width = mp.getVideoWidth();
+					int height = mp.getVideoHeight();
+					videoView.setLayoutParams(new RelativeLayout.LayoutParams(width,height));*/
+
+					//videoView.getLayoutParams().width = mp.getVideoWidth();
+					//videoView.getLayoutParams().height = mp.getVideoHeight();
+
+					//videoView.setLayoutParams(new FrameLayout.LayoutParams(mp.getVideoWidth(),mp.getVideoHeight()));
+					//videoView.requestLayout();
+
 					mp.setOnInfoListener(new MediaPlayer.OnInfoListener() {
 						@Override
 						public boolean onInfo(MediaPlayer mp, int what, int extra) {
