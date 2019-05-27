@@ -10,11 +10,11 @@ import android.support.v7.widget.Toolbar;
 import com.cinemacar.R;
 import com.cinemacar.fragments.ListFilmFragment;
 import com.cinemacar.fragments.WebViewFragment;
-import com.cinemacar.interfaces.OnListFilmItemClickListener;
+import com.cinemacar.interfaces.IListFilmItemClickPresenter;
 import com.cinemacar.model.ListFilm;
 
 
-public class MainActivity extends AppCompatActivity implements OnListFilmItemClickListener {
+public class MainActivity extends AppCompatActivity implements IListFilmItemClickPresenter {
 
 	ListFilmFragment listFilmFragment;
 	FragmentManager fragmentManager;

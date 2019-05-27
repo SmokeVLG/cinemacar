@@ -6,15 +6,15 @@ import android.webkit.WebResourceResponse;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.cinemacar.interfaces.WebViewPageLoadInterface;
+import com.cinemacar.interfaces.IWebView;
 
 
-public class CustomWebClientPresenter extends WebViewClient {
+public class WebViewPresenter extends WebViewClient {
 
-	private WebViewPageLoadInterface webViewPageLoadInterface;
+	private IWebView IWebView;
 
-	public CustomWebClientPresenter(WebViewPageLoadInterface webViewPageLoadInterface) {
-		this.webViewPageLoadInterface = webViewPageLoadInterface;
+	public WebViewPresenter(IWebView IWebView) {
+		this.IWebView = IWebView;
 	}
 
 	@Override
@@ -29,13 +29,13 @@ public class CustomWebClientPresenter extends WebViewClient {
 
 	@Override
 	public void onPageStarted(WebView view, String url, Bitmap favicon) {
-		webViewPageLoadInterface.loading();
+		IWebView.showLoading();
 		super.onPageStarted(view, url, favicon);
 	}
 
 	@Override
 	public void onPageFinished(WebView view, String url) {
-		webViewPageLoadInterface.successLoad();
+		IWebView.showSuccessLoad();
 		super.onPageFinished(view, url);
 	}
 

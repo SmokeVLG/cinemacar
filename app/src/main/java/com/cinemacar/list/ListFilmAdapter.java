@@ -7,16 +7,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.cinemacar.R;
-import com.cinemacar.interfaces.OnListFilmItemClickListener;
+import com.cinemacar.interfaces.IListFilmItemClickPresenter;
 import com.cinemacar.pojo.Film;
 
 import java.util.List;
 
 public class ListFilmAdapter extends RecyclerView.Adapter<ListFilmViewHolder> {
 	private List<Film> films;
-	private OnListFilmItemClickListener listFilmItemClickListener;
+	private IListFilmItemClickPresenter listFilmItemClickListener;
 
-	public ListFilmAdapter(List<Film> films, OnListFilmItemClickListener listFilmItemClickListener) {
+	public ListFilmAdapter(List<Film> films, IListFilmItemClickPresenter listFilmItemClickListener) {
 		this.films = films;
 		this.listFilmItemClickListener = listFilmItemClickListener;
 	}

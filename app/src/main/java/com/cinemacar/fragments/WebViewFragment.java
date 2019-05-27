@@ -11,11 +11,11 @@ import android.widget.ProgressBar;
 
 import com.cinemacar.R;
 import com.cinemacar.helpers.Const;
-import com.cinemacar.interfaces.WebViewPageLoadInterface;
-import com.cinemacar.presenters.CustomWebClientPresenter;
+import com.cinemacar.interfaces.IWebView;
+import com.cinemacar.presenters.WebViewPresenter;
 
 
-public class WebViewFragment extends Fragment implements WebViewPageLoadInterface {
+public class WebViewFragment extends Fragment implements IWebView {
 
 	private WebView webView;
 	private ProgressBar loading;
@@ -51,7 +51,7 @@ public class WebViewFragment extends Fragment implements WebViewPageLoadInterfac
 	private void initGUI(View root) {
 		webView = root.findViewById(R.id.web_view);
 		loading = root.findViewById(R.id.loading_progress);
-		webView.setWebViewClient(new CustomWebClientPresenter(this));
+		webView.setWebViewClient(new WebViewPresenter(this));
 		openURL(urlForKinopoisk);
 	}
 
@@ -69,13 +69,13 @@ public class WebViewFragment extends Fragment implements WebViewPageLoadInterfac
 	}
 
 	@Override
-	public void loading() {
+	public void showLoading() {
 		webView.setVisibility(View.GONE);
 		loading.setVisibility(View.VISIBLE);
 	}
 
 	@Override
-	public void successLoad() {
+	public void showSuccessLoad() {
 		webView.setVisibility(View.VISIBLE);
 		loading.setVisibility(View.GONE);
 	}

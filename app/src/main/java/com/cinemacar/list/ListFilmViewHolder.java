@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cinemacar.R;
-import com.cinemacar.interfaces.OnListFilmItemClickListener;
+import com.cinemacar.interfaces.IListFilmItemClickPresenter;
 import com.cinemacar.model.ListFilm;
 import com.cinemacar.pojo.Film;
 import com.cinemacar.pojo.Time;
@@ -49,7 +49,7 @@ class ListFilmViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	@SuppressLint("SetTextI18n")
-	void bindView(final int position, final OnListFilmItemClickListener itemClickListener) {
+	void bindView(final int position, final IListFilmItemClickPresenter itemClickListener) {
 		final Film currentItem = ListFilm.getInstance().getFilms().get(position);
 		dayText.setText(currentItem.getDate() + "\n" + currentItem.getPlace());
 		List<Time> times = currentItem.getTimes();

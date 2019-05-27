@@ -18,13 +18,13 @@ import com.cinemacar.R;
 import com.cinemacar.activities.MainActivity;
 import com.cinemacar.list.ListFilmAdapter;
 import com.cinemacar.helpers.Const;
-import com.cinemacar.interfaces.ListFilmView;
+import com.cinemacar.interfaces.IListFilmView;
 import com.cinemacar.presenters.ListFilmPresenter;
 
 /**
  * A fragment that launches other parts of the demo application.
  */
-public class ListFilmFragment extends Fragment implements ListFilmView {
+public class ListFilmFragment extends Fragment implements IListFilmView {
 	private SwipeRefreshLayout refresh;
 	private LinearLayout infoLayout;
 	private TextView infoMessage;
@@ -80,7 +80,7 @@ public class ListFilmFragment extends Fragment implements ListFilmView {
 	 * Успех загрузки списка фильмов
 	 * */
 	@Override
-	public void setSuccess(ListFilmAdapter listFilmAdapter) {
+	public void showSuccessLoad(ListFilmAdapter listFilmAdapter) {
 		refresh.setRefreshing(false);
 		infoLayout.setVisibility(View.GONE);
 		mRecyclerView.setAdapter(listFilmAdapter);
@@ -92,7 +92,7 @@ public class ListFilmFragment extends Fragment implements ListFilmView {
 	 * Ошибка загрузки списка фильмов
 	 * */
 	@Override
-	public void setFail(String keyError) {
+	public void showFailLoad(String keyError) {
 		refresh.setRefreshing(false);
 		mRecyclerView.setVisibility(View.GONE);
 		infoMessage.setText(Const.getMessage(keyError));

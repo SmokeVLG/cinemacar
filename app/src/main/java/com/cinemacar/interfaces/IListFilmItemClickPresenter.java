@@ -1,6 +1,6 @@
 package com.cinemacar.interfaces;
 
-public interface OnListFilmItemClickListener {
+public interface IListFilmItemClickPresenter {
 	void onListFilmItemClickListener(int index, int numberFilm);
 
 }
