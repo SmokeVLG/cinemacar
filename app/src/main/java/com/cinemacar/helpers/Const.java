@@ -1,14 +1,19 @@
 package com.cinemacar.helpers;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+
 import com.cinemacar.R;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class HelperConstants {
+public class Const {
 
     public static final String INTERNET_NOT_FOUND = "internet_not_found";
     public static final String FILMS_NOT_FOUND = "films_not_found";
+    public static final String URL = "URL";
 
     private static Map<String, Integer> previewInfoMap;
     private static Map<String, String> infoMessage;
