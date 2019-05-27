@@ -1,4 +1,4 @@
-package com.cinemacar.adapters;
+package com.cinemacar.list;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;

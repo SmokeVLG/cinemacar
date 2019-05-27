@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.cinemacar.helpers.Const;
-import com.cinemacar.interfaces.ListFilmLoadPresenterInterface;
+import com.cinemacar.interfaces.ListFilmPresenter;
 import com.cinemacar.pojo.Film;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -16,10 +16,10 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class LoadListFilm {
-	private ListFilmLoadPresenterInterface loadListFilmPresenterInterface;
+	private ListFilmPresenter loadListFilmPresenterInterface;
 
 
-	public LoadListFilm(ListFilmLoadPresenterInterface loadListFilmPresenterInterface) {
+	public LoadListFilm(ListFilmPresenter loadListFilmPresenterInterface) {
 		this.loadListFilmPresenterInterface = loadListFilmPresenterInterface;
 	}
 
@@ -34,12 +34,12 @@ public class LoadListFilm {
 						new GenericTypeIndicator<ArrayList<Film>>() {
 						};
 				ArrayList<Film> films = dataSnapshot.child("films").getValue(genericTypeIndicator);
-				loadListFilmPresenterInterface.success(films);
+				loadListFilmPresenterInterface.onSuccess(films);
 			}
 
 			@Override
 			public void onCancelled(@NonNull DatabaseError error) {
-				loadListFilmPresenterInterface.fail(Const.FILMS_NOT_FOUND);
+				loadListFilmPresenterInterface.onFail(Const.FILMS_NOT_FOUND);
 				Log.e(LoadListFilm.class.getSimpleName(), "Ошибка при чтении данных из базы данных.", error.toException());
 			}
 		});

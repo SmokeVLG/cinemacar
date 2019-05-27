@@ -1,4 +1,4 @@
-package com.cinemacar.adapters;
+package com.cinemacar.list;
 
 import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;

@@ -16,26 +16,26 @@ import android.widget.TextView;
 
 import com.cinemacar.R;
 import com.cinemacar.activities.MainActivity;
-import com.cinemacar.adapters.ListFilmAdapter;
+import com.cinemacar.list.ListFilmAdapter;
 import com.cinemacar.helpers.Const;
-import com.cinemacar.interfaces.ListFilmLoadInterface;
-import com.cinemacar.presenters.ListFilmLoadPresenter;
+import com.cinemacar.interfaces.ListFilmView;
+import com.cinemacar.presenters.ListFilmPresenter;
 
 /**
  * A fragment that launches other parts of the demo application.
  */
-public class ListFilmFragment extends Fragment implements ListFilmLoadInterface {
+public class ListFilmFragment extends Fragment implements ListFilmView {
 	private SwipeRefreshLayout refresh;
 	private LinearLayout infoLayout;
 	private TextView infoMessage;
 	private ImageView previewInfo;
 	private RecyclerView mRecyclerView;
-	ListFilmLoadPresenter loadListFilmPresenter;
+	ListFilmPresenter loadListFilmPresenter;
 
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		loadListFilmPresenter = new ListFilmLoadPresenter(this);
+		loadListFilmPresenter = new ListFilmPresenter(this);
 		super.onCreate(savedInstanceState);
 	}
 
@@ -70,7 +70,7 @@ public class ListFilmFragment extends Fragment implements ListFilmLoadInterface 
 	}
 
 	@Override
-	public void loading() {
+	public void showLoading() {
 		refresh.setRefreshing(true);
 		infoLayout.setVisibility(View.GONE);
 		mRecyclerView.setVisibility(View.GONE);
@@ -80,7 +80,7 @@ public class ListFilmFragment extends Fragment implements ListFilmLoadInterface 
 	 * Успех загрузки списка фильмов
 	 * */
 	@Override
-	public void success(ListFilmAdapter listFilmAdapter) {
+	public void setSuccess(ListFilmAdapter listFilmAdapter) {
 		refresh.setRefreshing(false);
 		infoLayout.setVisibility(View.GONE);
 		mRecyclerView.setAdapter(listFilmAdapter);
@@ -92,7 +92,7 @@ public class ListFilmFragment extends Fragment implements ListFilmLoadInterface 
 	 * Ошибка загрузки списка фильмов
 	 * */
 	@Override
-	public void fail(String keyError) {
+	public void setFail(String keyError) {
 		refresh.setRefreshing(false);
 		mRecyclerView.setVisibility(View.GONE);
 		infoMessage.setText(Const.getMessage(keyError));
