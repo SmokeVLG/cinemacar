@@ -72,7 +72,7 @@ public class FilmDetailFragment extends Fragment {
 				.beginTransaction();
 		VideoFragment videoFragment = new VideoFragment();
 		Bundle args = new Bundle();
-		args.putString(VideoFragment.VIDEO_URL, currentFilm.getTimes().get(numberFilm).getVideo());
+		args.putString(VideoFragment.VIDEO_URL, currentFilm.getTimes().get(numberFilm).getLink());
 		videoFragment.setArguments(args);
 		fragmentTransaction.replace(R.id.container, videoFragment);
 		fragmentTransaction.addToBackStack(null);

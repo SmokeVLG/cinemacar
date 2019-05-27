@@ -66,7 +66,7 @@ public class ListFilmFragment extends Fragment implements FilmsListInterface {
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.fragment_info, container, false);
+		View rootView = inflater.inflate(R.layout.fragment_list_fragment, container, false);
 		return initGUI(rootView);
 	}
 
@@ -98,7 +98,7 @@ public class ListFilmFragment extends Fragment implements FilmsListInterface {
 					GenericTypeIndicator<ArrayList<Film>> genericTypeIndicator =
 							new GenericTypeIndicator<ArrayList<Film>>() {
 							};
-					ArrayList<Film> films = dataSnapshot.getValue(genericTypeIndicator);
+					ArrayList<Film> films = dataSnapshot.child("films").getValue(genericTypeIndicator);
 					if (films.size() > 0) {
 						FilmList.getInstance().setFilms(films);
 						adapter = new Adapter(films, listener);

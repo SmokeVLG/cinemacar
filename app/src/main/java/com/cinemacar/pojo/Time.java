@@ -3,7 +3,7 @@ package com.cinemacar.pojo;
 public class Time {
 	private String description;
 	private String pic;
-	private String video;
+	private String link;
 	private String time;
 	private String name;
 
@@ -31,12 +31,12 @@ public class Time {
 		this.time = time;
 	}
 
-	public String getVideo() {
-		return video;
+	public String getLink() {
+		return link;
 	}
 
-	public void setVideo(String video) {
-		this.video = video;
+	public void setLink(String link) {
+		this.link = link;
 	}
 
 	public String getName() {
