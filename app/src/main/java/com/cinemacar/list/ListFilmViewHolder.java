@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cinemacar.R;
-import com.cinemacar.interfaces.IListFilmItemClickPresenter;
+import com.cinemacar.interfaces.IListFilmItemClick;
 import com.cinemacar.model.ListFilm;
 import com.cinemacar.pojo.Film;
 import com.cinemacar.pojo.Time;
@@ -20,17 +20,20 @@ import java.util.List;
 class ListFilmViewHolder extends RecyclerView.ViewHolder {
 	private static final int ONE_FILM_IN_DAY = 1;
 	private static final int TWO_FILM_IN_DAY = 2;
+	private static final int INDEX_FIRST_FILM = 0;
+	private static final int INDEX_SECOND_FILM = 1;
+
 	private TextView filmName;
 	private TextView secondFilmName;
 	private TextView dayText;
-	private CardView cv_first_film;
+	private CardView cvFirstFilm;
 	private TextView firstFilmTime;
 	private TextView firstFilmDescription;
 	private ImageView firstFilmImage;
 	private TextView secondFilmTime;
 	private TextView secondFilmDescription;
 	private ImageView secondFilmImage;
-	private CardView cv_second_film;
+	private CardView cvSecondFilm;
 
 	ListFilmViewHolder(@NonNull View itemView) {
 		super(itemView);
@@ -38,75 +41,72 @@ class ListFilmViewHolder extends RecyclerView.ViewHolder {
 		filmName = itemView.findViewById(R.id.film_name);
 		secondFilmName = itemView.findViewById(R.id.second_film_name);
 		dayText = itemView.findViewById(R.id.day_text);
-		cv_first_film = itemView.findViewById(R.id.cv_first_film);
+		cvFirstFilm = itemView.findViewById(R.id.cv_first_film);
 		firstFilmDescription = itemView.findViewById(R.id.first_film_description);
 		firstFilmTime = itemView.findViewById(R.id.first_film_time);
 		firstFilmImage = itemView.findViewById(R.id.first_film_image);
 		secondFilmDescription = itemView.findViewById(R.id.second_film_description);
 		secondFilmTime = itemView.findViewById(R.id.second_film_time);
 		secondFilmImage = itemView.findViewById(R.id.second_film_image);
-		cv_second_film = itemView.findViewById(R.id.cv_second_film);
+		cvSecondFilm = itemView.findViewById(R.id.cv_second_film);
 	}
 
 	@SuppressLint("SetTextI18n")
-	void bindView(final int position, final IListFilmItemClickPresenter itemClickListener) {
+	void bindView(final int position, final IListFilmItemClick iListFilmItemClick) {
 		final Film currentItem = ListFilm.getInstance().getFilms().get(position);
 		dayText.setText(currentItem.getDate() + "\n" + currentItem.getPlace());
 		List<Time> times = currentItem.getTimes();
 		int countFilmsInDay = times.size();
-		int numberFilm = 0;
 		switch (countFilmsInDay) {
 			case ONE_FILM_IN_DAY:
-				numberFilm = 0;
-				firstFilmDescription.setText(times.get(numberFilm).getDescription());
-				firstFilmTime.setText(times.get(numberFilm).getTime());
+				firstFilmDescription.setText(times.get(INDEX_FIRST_FILM).getDescription());
+				firstFilmTime.setText(times.get(INDEX_FIRST_FILM).getTime());
 				Picasso
 						.get()
-						.load(times.get(numberFilm).getPic())
+						.load(times.get(INDEX_FIRST_FILM).getPic())
 						.placeholder(R.drawable.ic_car)
 						.fit()
 						.into(firstFilmImage);
-				cv_first_film.setOnClickListener(new View.OnClickListener() {
+				cvFirstFilm.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						itemClickListener.onListFilmItemClickListener(position, 0);
+						iListFilmItemClick.onListFilmItemClickListener(position, INDEX_FIRST_FILM);
 					}
 				});
 				break;
 			case TWO_FILM_IN_DAY:
-				filmName.setText(times.get(numberFilm).getName());
-				cv_second_film.setVisibility(View.VISIBLE);
-				firstFilmDescription.setText(times.get(numberFilm).getDescription());
-				firstFilmTime.setText(times.get(numberFilm).getTime());
+				filmName.setText(times.get(INDEX_FIRST_FILM).getName());
+				cvSecondFilm.setVisibility(View.VISIBLE);
+				firstFilmDescription.setText(times.get(INDEX_FIRST_FILM).getDescription());
+				firstFilmTime.setText(times.get(INDEX_FIRST_FILM).getTime());
 				Picasso
 						.get()
-						.load(times.get(numberFilm).getPic())
+						.load(times.get(INDEX_FIRST_FILM).getPic())
 						.placeholder(R.drawable.ic_car)
 						.fit()
 						.into(firstFilmImage);
-				final int finalNumberFilm = numberFilm;
-				cv_first_film.setOnClickListener(new View.OnClickListener() {
+
+				cvFirstFilm.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						itemClickListener.onListFilmItemClickListener(position, finalNumberFilm);
+						iListFilmItemClick.onListFilmItemClickListener(position, INDEX_FIRST_FILM);
 					}
 				});
 
-				numberFilm = 1;
-				secondFilmName.setText(times.get(numberFilm).getName());
-				secondFilmDescription.setText(times.get(numberFilm).getDescription());
-				secondFilmTime.setText(times.get(numberFilm).getTime());
+
+				secondFilmName.setText(times.get(INDEX_SECOND_FILM).getName());
+				secondFilmDescription.setText(times.get(INDEX_SECOND_FILM).getDescription());
+				secondFilmTime.setText(times.get(INDEX_SECOND_FILM).getTime());
 				Picasso
 						.get()
-						.load(times.get(numberFilm).getPic())
+						.load(times.get(INDEX_SECOND_FILM).getPic())
 						.fit()
 						.placeholder(R.drawable.ic_car)
 						.into(secondFilmImage);
-				final int finalNumberFilm1 = numberFilm;
-				cv_second_film.setOnClickListener(new View.OnClickListener() {
+				cvSecondFilm.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						itemClickListener.onListFilmItemClickListener(position, finalNumberFilm1);
+						iListFilmItemClick.onListFilmItemClickListener(position, INDEX_SECOND_FILM);
 					}
 				});
 				break;

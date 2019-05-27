@@ -1,11 +1,15 @@
 package com.cinemacar.model;
 
+import com.cinemacar.fragments.ListFilmFragment;
 import com.cinemacar.pojo.Film;
 
 import java.util.List;
 
 
 public class ListFilm {
+	public static String TAG = ListFilm.class.getSimpleName();
+
+
 	private static final ListFilm ourInstance = new ListFilm();
 	private List<Film> films;
 

@@ -2,6 +2,7 @@ package com.cinemacar.fragments;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,7 +42,7 @@ public class WebViewFragment extends Fragment implements IWebView {
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
 	                         Bundle savedInstanceState) {
 		View root = inflater.inflate(R.layout.web_view_fragment, container, false);
 		initGUI(root);
@@ -69,13 +70,13 @@ public class WebViewFragment extends Fragment implements IWebView {
 	}
 
 	@Override
-	public void showLoading() {
+	public void showLoadingKinopoiskLink() {
 		webView.setVisibility(View.GONE);
 		loading.setVisibility(View.VISIBLE);
 	}
 
 	@Override
-	public void showSuccessLoad() {
+	public void showSuccessLoadKinopoiskLink() {
 		webView.setVisibility(View.VISIBLE);
 		loading.setVisibility(View.GONE);
 	}

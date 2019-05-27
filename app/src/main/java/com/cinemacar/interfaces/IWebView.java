@@ -2,8 +2,8 @@ package com.cinemacar.interfaces;
 
 public interface IWebView {
 
-    void showLoading();
+    void showLoadingKinopoiskLink();
 
-    void showSuccessLoad();
+    void showSuccessLoadKinopoiskLink();
 
 }

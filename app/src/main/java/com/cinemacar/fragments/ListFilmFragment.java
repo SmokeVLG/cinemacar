@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,32 +17,34 @@ import android.widget.TextView;
 
 import com.cinemacar.R;
 import com.cinemacar.activities.MainActivity;
-import com.cinemacar.list.ListFilmAdapter;
 import com.cinemacar.helpers.Const;
 import com.cinemacar.interfaces.IListFilmView;
-import com.cinemacar.presenters.ListFilmPresenter;
+import com.cinemacar.list.ListFilmAdapter;
+import com.cinemacar.presenters.ListFilm;
 
 /**
  * A fragment that launches other parts of the demo application.
  */
 public class ListFilmFragment extends Fragment implements IListFilmView {
+	public static String TAG = ListFilmFragment.class.getSimpleName();
 	private SwipeRefreshLayout refresh;
 	private LinearLayout infoLayout;
 	private TextView infoMessage;
 	private ImageView previewInfo;
 	private RecyclerView mRecyclerView;
-	ListFilmPresenter loadListFilmPresenter;
+	ListFilm loadListFilmPresenter;
 
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		loadListFilmPresenter = new ListFilmPresenter(this);
+		loadListFilmPresenter = new ListFilm(this);
 		super.onCreate(savedInstanceState);
 	}
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.film_list_fragment, container, false);
+		Log.d(TAG, "Инициализация интерфейса со списком фильмов.");
 		return initGUI(rootView);
 	}
 
@@ -69,8 +72,12 @@ public class ListFilmFragment extends Fragment implements IListFilmView {
 		super.onDestroyView();
 	}
 
+	/*
+	 * Показать загруженные фильмы
+	 * */
 	@Override
-	public void showLoading() {
+	public void showLoadingFilms() {
+		Log.d(TAG, "Показ загруженных фильмов.");
 		refresh.setRefreshing(true);
 		infoLayout.setVisibility(View.GONE);
 		mRecyclerView.setVisibility(View.GONE);
@@ -80,7 +87,8 @@ public class ListFilmFragment extends Fragment implements IListFilmView {
 	 * Успех загрузки списка фильмов
 	 * */
 	@Override
-	public void showSuccessLoad(ListFilmAdapter listFilmAdapter) {
+	public void showSuccessLoadFilms(ListFilmAdapter listFilmAdapter) {
+		Log.d(TAG, "Список фильмов успешно загружен.");
 		refresh.setRefreshing(false);
 		infoLayout.setVisibility(View.GONE);
 		mRecyclerView.setAdapter(listFilmAdapter);
@@ -92,7 +100,8 @@ public class ListFilmFragment extends Fragment implements IListFilmView {
 	 * Ошибка загрузки списка фильмов
 	 * */
 	@Override
-	public void showFailLoad(String keyError) {
+	public void showFailLoadFilms(String keyError) {
+		Log.d(TAG, "Ошибка при загрузке списка фильмов успешно загружен.");
 		refresh.setRefreshing(false);
 		mRecyclerView.setVisibility(View.GONE);
 		infoMessage.setText(Const.getMessage(keyError));

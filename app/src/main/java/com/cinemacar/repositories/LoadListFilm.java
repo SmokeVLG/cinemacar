@@ -1,4 +1,4 @@
-package com.cinemacar.providers;
+package com.cinemacar.repositories;
 
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -16,30 +16,32 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class LoadListFilm {
-	private IListFilmPresenter loadIListFilmPresenterInterface;
+	public static String TAG = LoadListFilm.class.getSimpleName();
+	private IListFilmPresenter iListFilmPresenter;
 
-
-	public LoadListFilm(IListFilmPresenter loadIListFilmPresenterInterface) {
-		this.loadIListFilmPresenterInterface = loadIListFilmPresenterInterface;
+	public LoadListFilm(IListFilmPresenter iListFilmPresenter) {
+		this.iListFilmPresenter = iListFilmPresenter;
 	}
 
 	public void getFilms() {
-		DatabaseReference myRef;
+		Log.d(TAG, "Получение списка фильмов.");
 		FirebaseDatabase database = FirebaseDatabase.getInstance();
-		myRef = database.getReference("films");
+		DatabaseReference myRef = database.getReference("films");
 		myRef.addValueEventListener(new ValueEventListener() {
 			@Override
 			public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+				Log.d(TAG, "Изменение данных списка фильмов.");
 				GenericTypeIndicator<ArrayList<Film>> genericTypeIndicator =
 						new GenericTypeIndicator<ArrayList<Film>>() {
 						};
 				ArrayList<Film> films = dataSnapshot.child("films").getValue(genericTypeIndicator);
-				loadIListFilmPresenterInterface.setSuccess(films);
+				iListFilmPresenter.setSuccessLoadFilms(films);
 			}
 
 			@Override
 			public void onCancelled(@NonNull DatabaseError error) {
-				loadIListFilmPresenterInterface.setFail(Const.FILMS_NOT_FOUND);
+				Log.d(TAG, "Ошибка при чтении данных из базы данных.");
+				iListFilmPresenter.setFailLoadFilms(Const.FILMS_NOT_FOUND);
 				Log.e(LoadListFilm.class.getSimpleName(), "Ошибка при чтении данных из базы данных.", error.toException());
 			}
 		});

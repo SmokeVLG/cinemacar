@@ -11,10 +11,10 @@ import com.cinemacar.interfaces.IWebView;
 
 public class WebViewPresenter extends WebViewClient {
 
-	private IWebView IWebView;
+	private IWebView iWebView;
 
-	public WebViewPresenter(IWebView IWebView) {
-		this.IWebView = IWebView;
+	public WebViewPresenter(IWebView iWebView) {
+		this.iWebView = iWebView;
 	}
 
 	@Override
@@ -29,13 +29,13 @@ public class WebViewPresenter extends WebViewClient {
 
 	@Override
 	public void onPageStarted(WebView view, String url, Bitmap favicon) {
-		IWebView.showLoading();
+		iWebView.showLoadingKinopoiskLink();
 		super.onPageStarted(view, url, favicon);
 	}
 
 	@Override
 	public void onPageFinished(WebView view, String url) {
-		IWebView.showSuccessLoad();
+		iWebView.showSuccessLoadKinopoiskLink();
 		super.onPageFinished(view, url);
 	}
 
