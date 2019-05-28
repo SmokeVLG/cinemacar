@@ -1,6 +1,6 @@
 package com.cinemacar.pojo;
 
-public class Time {
+public class Film {
 	private String description;
 	private String pic;
 	private String link;
