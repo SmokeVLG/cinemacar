@@ -10,6 +10,7 @@ public class Const {
 	public static final String INTERNET_NOT_FOUND = "internet_not_found";
 	public static final String FILMS_NOT_FOUND = "films_not_found";
 	public static final String URL = "URL";
+	public static final String ROOT_ELEMENT = "films";
 
 	private static Map<String, Integer> previewInfoMap;
 	private static Map<String, String> infoMessage;

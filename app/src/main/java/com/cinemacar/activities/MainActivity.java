@@ -23,9 +23,7 @@ public class MainActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		toolBar = findViewById(R.id.tool_bar);
-		setSupportActionBar(toolBar);
-		initFragments();
+		initGUI();
 	}
 
 	@Override
@@ -42,7 +40,10 @@ public class MainActivity extends AppCompatActivity {
 		fragmentTransaction.commit();
 	}
 
-	private void initFragments() {
+	private void initGUI() {
+		Log.d(TAG, "Инициализация GUI основной активности.");
+		toolBar = findViewById(R.id.tool_bar);
+		setSupportActionBar(toolBar);
 		fragmentManager = getSupportFragmentManager();
 		listFilmFragment = new ListFilmFragment();
 	}

@@ -1,11 +1,16 @@
 package com.cinemacar.interfaces;
 
-import com.cinemacar.pojo.Film;
+import com.cinemacar.pojo.Day;
 
 import java.util.ArrayList;
 
 public interface IListFilmPresenter {
-	void setSuccessLoadFilms(ArrayList<Film> films);
+	//Успешная загрузка списка фильмов
+	void setSuccessLoadFilms(ArrayList<Day> days);
 
+	//Ошибка при загрузке списка фильмов
 	void setFailLoadFilms(String key);
+
+	//Нажатие на фильм
+	void onFilmClick(String link);
 }

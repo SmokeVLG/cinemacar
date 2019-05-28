@@ -4,23 +4,33 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.cinemacar.R;
 import com.cinemacar.helpers.Const;
 import com.cinemacar.interfaces.IWebView;
 import com.cinemacar.presenters.WebViewPresenter;
 
+import static com.cinemacar.helpers.Const.INTERNET_NOT_FOUND;
+
 
 public class WebViewFragment extends Fragment implements IWebView {
 
+	public static String TAG = WebViewFragment.class.getSimpleName();
 	private WebView webView;
 	private ProgressBar loading;
 	private String urlForKinopoisk;
+	private LinearLayout infoLayout;
+	private ImageView previewInfo;
+	private TextView infoMessage;
 
 	public WebViewFragment() {
 	}
@@ -52,12 +62,18 @@ public class WebViewFragment extends Fragment implements IWebView {
 	private void initGUI(View root) {
 		webView = root.findViewById(R.id.web_view);
 		loading = root.findViewById(R.id.loading_progress);
-		webView.setWebViewClient(new WebViewPresenter(this));
-		openURL(urlForKinopoisk);
+		previewInfo = root.findViewById(R.id.preview_info);
+		infoLayout = root.findViewById(R.id.info);
+		infoMessage = root.findViewById(R.id.info_message);
+		WebViewPresenter webViewPresenter = new WebViewPresenter(this);
+		webView.setWebViewClient(webViewPresenter);
+		//Начинаем загрузку страницы
+		webViewPresenter.openURL(urlForKinopoisk);
 	}
 
 	@SuppressLint("SetJavaScriptEnabled")
-	private void openURL(String url) {
+	@Override
+	public void openURL(String url) {
 		webView.getSettings().setLoadsImagesAutomatically(true);
 		webView.getSettings().setJavaScriptEnabled(true);
 		webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
@@ -75,6 +91,9 @@ public class WebViewFragment extends Fragment implements IWebView {
 		loading.setVisibility(View.VISIBLE);
 	}
 
+	/*
+	 * Убрать ролик загрузки
+	 * */
 	@Override
 	public void showSuccessLoadKinopoiskLink() {
 		webView.setVisibility(View.VISIBLE);

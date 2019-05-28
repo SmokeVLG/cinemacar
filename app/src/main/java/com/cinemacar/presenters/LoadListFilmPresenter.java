@@ -5,41 +5,41 @@ import android.util.Log;
 import com.cinemacar.App;
 import com.cinemacar.fragments.WebViewFragment;
 import com.cinemacar.helpers.Const;
-import com.cinemacar.interfaces.IListFilmItemClick;
 import com.cinemacar.interfaces.IListFilmPresenter;
 import com.cinemacar.interfaces.IListFilmView;
 import com.cinemacar.list.ListFilmAdapter;
-import com.cinemacar.pojo.Film;
-import com.cinemacar.repositories.LoadListFilm;
+import com.cinemacar.model.ListDays;
+import com.cinemacar.pojo.Day;
+import com.cinemacar.repositories.LoadListDays;
 
 import java.util.ArrayList;
 
-public class ListFilm implements IListFilmPresenter, IListFilmItemClick {
-	private static String TAG = ListFilm.class.getSimpleName();
+public class LoadListFilmPresenter implements IListFilmPresenter {
+	private static String TAG = LoadListFilmPresenter.class.getSimpleName();
 	private IListFilmView iListFilmView;
-	private LoadListFilm loadListFilm;
+	private LoadListDays loadListDays;
 
-	public ListFilm(IListFilmView iListFilmView) {
+	public LoadListFilmPresenter(IListFilmView iListFilmView) {
 		this.iListFilmView = iListFilmView;
-		loadListFilm = new LoadListFilm(this);
+		loadListDays = new LoadListDays(this);
 	}
 
-	public void getFilms() {
+	public void loadFilms() {
 		Log.d(TAG, "Получить список фильмов.");
 		iListFilmView.showLoadingFilms();
 		if (App.getInstance().isOnline()) {
-			loadListFilm.getFilms();
+			loadListDays.getFilms();
 		} else {
 			setFailLoadFilms(Const.INTERNET_NOT_FOUND);
 		}
 	}
 
 	@Override
-	public void setSuccessLoadFilms(ArrayList<Film> films) {
+	public void setSuccessLoadFilms(ArrayList<Day> days) {
 		Log.d(TAG, "Успешная загрузка списка фильмов.");
-		if (films.size() > 0) {
-			com.cinemacar.model.ListFilm.getInstance().setFilms(films);
-			ListFilmAdapter listFilmAdapter = new ListFilmAdapter(films, this);
+		if (days.size() > 0) {
+			ListDays.getInstance().setDays(days);
+			ListFilmAdapter listFilmAdapter = new ListFilmAdapter(days, this);
 			iListFilmView.showSuccessLoadFilms(listFilmAdapter);
 		} else {
 			iListFilmView.showFailLoadFilms(Const.FILMS_NOT_FOUND);
@@ -53,8 +53,8 @@ public class ListFilm implements IListFilmPresenter, IListFilmItemClick {
 	}
 
 	@Override
-	public void onListFilmItemClickListener(int index, int numberFilm) {
+	public void onFilmClick(String link) {
 		Log.d(TAG, "Переход на страницу кинопоиска.");
-		iListFilmView.goToFragment(WebViewFragment.newInstance(com.cinemacar.model.ListFilm.getInstance().getFilms().get(index).getTimes().get(numberFilm).getLink()));
+		iListFilmView.goToFragment(WebViewFragment.newInstance(link));
 	}
 }

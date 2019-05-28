@@ -1,9 +1,12 @@
 package com.cinemacar.interfaces;
 
 public interface IWebView {
+	//Показать загрузку страничку
+	void showLoadingKinopoiskLink();
 
-    void showLoadingKinopoiskLink();
+	//Успешное открытие стрнички
+	void showSuccessLoadKinopoiskLink();
 
-    void showSuccessLoadKinopoiskLink();
-
+	//Открыть страничку
+	void openURL(String urlForKinopoisk);
 }

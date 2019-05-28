@@ -7,18 +7,19 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.cinemacar.R;
-import com.cinemacar.interfaces.IListFilmItemClick;
-import com.cinemacar.pojo.Film;
+import com.cinemacar.interfaces.IListFilmPresenter;
+import com.cinemacar.model.ListDays;
+import com.cinemacar.pojo.Day;
 
 import java.util.List;
 
 public class ListFilmAdapter extends RecyclerView.Adapter<ListFilmViewHolder> {
-	private List<Film> films;
-	private IListFilmItemClick iListFilmItemClick;
+	private List<Day> days;
+	private IListFilmPresenter iListFilmPresenter;
 
-	public ListFilmAdapter(List<Film> films, IListFilmItemClick iListFilmItemClick) {
-		this.films = films;
-		this.iListFilmItemClick = iListFilmItemClick;
+	public ListFilmAdapter(List<Day> days, IListFilmPresenter iListFilmPresenter) {
+		this.days = days;
+		this.iListFilmPresenter = iListFilmPresenter;
 	}
 
 	@NonNull
@@ -31,13 +32,13 @@ public class ListFilmAdapter extends RecyclerView.Adapter<ListFilmViewHolder> {
 
 	@Override
 	public void onBindViewHolder(@NonNull final ListFilmViewHolder holder, int position) {
-		holder.bindView(position, iListFilmItemClick);
+		holder.bindView(ListDays.getInstance().getDays().get(position), iListFilmPresenter);
 	}
 
 	@Override
 	public int getItemCount() {
-		if (films != null) {
-			return films.size();
+		if (days != null) {
+			return days.size();
 		} else {
 			return 0;
 		}

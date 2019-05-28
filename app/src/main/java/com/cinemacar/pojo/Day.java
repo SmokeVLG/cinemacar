@@ -2,7 +2,7 @@ package com.cinemacar.pojo;
 
 import java.util.List;
 
-public class Film {
+public class Day {
 
 	private String date;
 	private String place;

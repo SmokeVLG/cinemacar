@@ -44,4 +44,7 @@ public class WebViewPresenter extends WebViewClient {
 		super.onLoadResource(view, url);
 	}
 
+	public void openURL(String urlForKinopoisk) {
+		iWebView.openURL(urlForKinopoisk);
+	}
 }

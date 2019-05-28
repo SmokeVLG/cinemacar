@@ -20,7 +20,7 @@ import com.cinemacar.activities.MainActivity;
 import com.cinemacar.helpers.Const;
 import com.cinemacar.interfaces.IListFilmView;
 import com.cinemacar.list.ListFilmAdapter;
-import com.cinemacar.presenters.ListFilm;
+import com.cinemacar.presenters.LoadListFilmPresenter;
 
 /**
  * A fragment that launches other parts of the demo application.
@@ -32,12 +32,12 @@ public class ListFilmFragment extends Fragment implements IListFilmView {
 	private TextView infoMessage;
 	private ImageView previewInfo;
 	private RecyclerView mRecyclerView;
-	ListFilm loadListFilmPresenter;
+	LoadListFilmPresenter loadListFilmPresenter;
 
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		loadListFilmPresenter = new ListFilm(this);
+		loadListFilmPresenter = new LoadListFilmPresenter(this);
 		super.onCreate(savedInstanceState);
 	}
 
@@ -54,7 +54,7 @@ public class ListFilmFragment extends Fragment implements IListFilmView {
 		refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 			@Override
 			public void onRefresh() {
-				loadListFilmPresenter.getFilms();
+				loadListFilmPresenter.loadFilms();
 			}
 		});
 		mRecyclerView = root.findViewById(R.id.films_recycler);
@@ -63,7 +63,8 @@ public class ListFilmFragment extends Fragment implements IListFilmView {
 		infoLayout = root.findViewById(R.id.info);
 		infoMessage = root.findViewById(R.id.info_message);
 		previewInfo = root.findViewById(R.id.preview_info);
-		loadListFilmPresenter.getFilms();
+		//Сообщаем презентеру о необходимости загрузки фильмов
+		loadListFilmPresenter.loadFilms();
 		return root;
 	}
 
@@ -77,14 +78,14 @@ public class ListFilmFragment extends Fragment implements IListFilmView {
 	 * */
 	@Override
 	public void showLoadingFilms() {
-		Log.d(TAG, "Показ загруженных фильмов.");
+		Log.d(TAG, "Отображение загруженных фильмов.");
 		refresh.setRefreshing(true);
 		infoLayout.setVisibility(View.GONE);
 		mRecyclerView.setVisibility(View.GONE);
 	}
 
 	/*
-	 * Успех загрузки списка фильмов
+	 * Успешная загрузка фильмов загрузки списка фильмов
 	 * */
 	@Override
 	public void showSuccessLoadFilms(ListFilmAdapter listFilmAdapter) {
@@ -110,8 +111,12 @@ public class ListFilmFragment extends Fragment implements IListFilmView {
 		refresh.setRefreshing(false);
 	}
 
+	/*
+	 *Переход на другой фрагмент.
+	 * */
 	@Override
 	public void goToFragment(Fragment fragment) {
+		Log.d(TAG, "Переход на фрагмент -->" + fragment.getClass().getSimpleName());
 		FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
 		fragmentTransaction.replace(R.id.container, fragment);
 		fragmentTransaction.addToBackStack(null);
