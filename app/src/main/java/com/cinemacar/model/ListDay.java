@@ -5,14 +5,14 @@ import com.cinemacar.pojo.Day;
 import java.util.List;
 
 
-public class ListDays {
-	public static String TAG = ListDays.class.getSimpleName();
+public class ListDay {
+	public static String TAG = ListDay.class.getSimpleName();
 
 
-	private static final ListDays ourInstance = new ListDays();
+	private static final ListDay ourInstance = new ListDay();
 	private List<Day> days;
 
-	public static ListDays getInstance() {
+	public static ListDay getInstance() {
 		return ourInstance;
 	}
 

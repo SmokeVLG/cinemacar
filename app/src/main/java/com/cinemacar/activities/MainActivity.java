@@ -9,13 +9,13 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
 import com.cinemacar.R;
-import com.cinemacar.fragments.ListFilmFragment;
+import com.cinemacar.fragments.ListDaysFragment;
 
 
 public class MainActivity extends AppCompatActivity {
 	public static String TAG = MainActivity.class.getSimpleName();
 
-	ListFilmFragment listFilmFragment;
+	ListDaysFragment listDaysFragment;
 	FragmentManager fragmentManager;
 	Toolbar toolBar;
 
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 	protected void onStart() {
 		super.onStart();
 		Log.d(TAG, "Переход во фрагмент со списком фильмов.");
-		goToFragment(listFilmFragment);
+		goToFragment(listDaysFragment);
 	}
 
 	public void goToFragment(Fragment fragment) {
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 		toolBar = findViewById(R.id.tool_bar);
 		setSupportActionBar(toolBar);
 		fragmentManager = getSupportFragmentManager();
-		listFilmFragment = new ListFilmFragment();
+		listDaysFragment = new ListDaysFragment();
 	}
 
 	@Override

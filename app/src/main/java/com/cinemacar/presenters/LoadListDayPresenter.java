@@ -5,28 +5,28 @@ import android.util.Log;
 import com.cinemacar.App;
 import com.cinemacar.fragments.WebViewFragment;
 import com.cinemacar.helpers.Const;
-import com.cinemacar.interfaces.IListFilmPresenter;
-import com.cinemacar.interfaces.IListFilmView;
-import com.cinemacar.list.ListFilmAdapter;
-import com.cinemacar.model.ListDays;
+import com.cinemacar.interfaces.IListDayPresenter;
+import com.cinemacar.interfaces.IListDayView;
+import com.cinemacar.list.ListDayAdapter;
+import com.cinemacar.model.ListDay;
 import com.cinemacar.pojo.Day;
 import com.cinemacar.repositories.LoadListDays;
 
 import java.util.ArrayList;
 
-public class LoadListFilmPresenter implements IListFilmPresenter {
-	private static String TAG = LoadListFilmPresenter.class.getSimpleName();
-	private IListFilmView iListFilmView;
+public class LoadListDayPresenter implements IListDayPresenter {
+	private static String TAG = LoadListDayPresenter.class.getSimpleName();
+	private IListDayView iListDayView;
 	private LoadListDays loadListDays;
 
-	public LoadListFilmPresenter(IListFilmView iListFilmView) {
-		this.iListFilmView = iListFilmView;
+	public LoadListDayPresenter(IListDayView iListDayView) {
+		this.iListDayView = iListDayView;
 		loadListDays = new LoadListDays(this);
 	}
 
 	public void loadFilms() {
 		Log.d(TAG, "Получить список фильмов.");
-		iListFilmView.showLoadingFilms();
+		iListDayView.showLoadingFilms();
 		if (App.getInstance().isOnline()) {
 			loadListDays.getFilms();
 		} else {
@@ -38,23 +38,23 @@ public class LoadListFilmPresenter implements IListFilmPresenter {
 	public void setSuccessLoadFilms(ArrayList<Day> days) {
 		Log.d(TAG, "Успешная загрузка списка фильмов.");
 		if (days.size() > 0) {
-			ListDays.getInstance().setDays(days);
-			ListFilmAdapter listFilmAdapter = new ListFilmAdapter(days, this);
-			iListFilmView.showSuccessLoadFilms(listFilmAdapter);
+			ListDay.getInstance().setDays(days);
+			ListDayAdapter listDayAdapter = new ListDayAdapter(days, this);
+			iListDayView.showSuccessLoadFilms(listDayAdapter);
 		} else {
-			iListFilmView.showFailLoadFilms(Const.FILMS_NOT_FOUND);
+			iListDayView.showFailLoadFilms(Const.FILMS_NOT_FOUND);
 		}
 	}
 
 	@Override
 	public void setFailLoadFilms(String key) {
 		Log.d(TAG, "Ошибка при загрузке списка фильмов.");
-		iListFilmView.showFailLoadFilms(Const.FILMS_NOT_FOUND);
+		iListDayView.showFailLoadFilms(Const.FILMS_NOT_FOUND);
 	}
 
 	@Override
 	public void onFilmClick(String link) {
 		Log.d(TAG, "Переход на страницу кинопоиска.");
-		iListFilmView.goToFragment(WebViewFragment.newInstance(link));
+		iListDayView.goToFragment(WebViewFragment.newInstance(link));
 	}
 }

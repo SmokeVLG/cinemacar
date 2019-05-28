@@ -18,26 +18,26 @@ import android.widget.TextView;
 import com.cinemacar.R;
 import com.cinemacar.activities.MainActivity;
 import com.cinemacar.helpers.Const;
-import com.cinemacar.interfaces.IListFilmView;
-import com.cinemacar.list.ListFilmAdapter;
-import com.cinemacar.presenters.LoadListFilmPresenter;
+import com.cinemacar.interfaces.IListDayView;
+import com.cinemacar.list.ListDayAdapter;
+import com.cinemacar.presenters.LoadListDayPresenter;
 
 /**
  * A fragment that launches other parts of the demo application.
  */
-public class ListFilmFragment extends Fragment implements IListFilmView {
-	public static String TAG = ListFilmFragment.class.getSimpleName();
+public class ListDaysFragment extends Fragment implements IListDayView {
+	public static String TAG = ListDaysFragment.class.getSimpleName();
 	private SwipeRefreshLayout refresh;
 	private LinearLayout infoLayout;
 	private TextView infoMessage;
 	private ImageView previewInfo;
 	private RecyclerView mRecyclerView;
-	LoadListFilmPresenter loadListFilmPresenter;
+	LoadListDayPresenter loadListFilmPresenter;
 
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		loadListFilmPresenter = new LoadListFilmPresenter(this);
+		loadListFilmPresenter = new LoadListDayPresenter(this);
 		super.onCreate(savedInstanceState);
 	}
 
@@ -88,11 +88,11 @@ public class ListFilmFragment extends Fragment implements IListFilmView {
 	 * Успешная загрузка фильмов загрузки списка фильмов
 	 * */
 	@Override
-	public void showSuccessLoadFilms(ListFilmAdapter listFilmAdapter) {
+	public void showSuccessLoadFilms(ListDayAdapter listDayAdapter) {
 		Log.d(TAG, "Список фильмов успешно загружен.");
 		refresh.setRefreshing(false);
 		infoLayout.setVisibility(View.GONE);
-		mRecyclerView.setAdapter(listFilmAdapter);
+		mRecyclerView.setAdapter(listDayAdapter);
 		mRecyclerView.setVisibility(View.VISIBLE);
 		refresh.setRefreshing(false);
 	}
