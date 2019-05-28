@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.cinemacar.R;
 import com.cinemacar.interfaces.IListDayPresenter;
 import com.cinemacar.pojo.Day;
-import com.cinemacar.pojo.Film;
+import com.cinemacar.pojo.Time;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -53,15 +53,15 @@ class ListDayViewHolder extends RecyclerView.ViewHolder {
 	@SuppressLint("SetTextI18n")
 	void bindView(final Day currentDay, final IListDayPresenter iListDayPresenter) {
 		dayText.setText(currentDay.getDate() + "\n" + currentDay.getPlace());
-		List<Film> films = currentDay.getFilms();
-		int countFilmsInDay = films.size();
+		List<Time> times = currentDay.getTimes();
+		int countFilmsInDay = times.size();
 		switch (countFilmsInDay) {
 			case ONE_FILM_IN_DAY:
-				loadFirstFilm(films, iListDayPresenter);
+				loadFirstFilm(times, iListDayPresenter);
 				break;
 			case TWO_FILM_IN_DAY:
-				loadFirstFilm(films, iListDayPresenter);
-				loadSecondFilm(films, iListDayPresenter);
+				loadFirstFilm(times, iListDayPresenter);
+				loadSecondFilm(times, iListDayPresenter);
 				break;
 			default:
 				break;
@@ -69,14 +69,14 @@ class ListDayViewHolder extends RecyclerView.ViewHolder {
 
 	}
 
-	private void loadSecondFilm(final List<Film> films, final IListDayPresenter iListDayPresenter) {
+	private void loadSecondFilm(final List<Time> times, final IListDayPresenter iListDayPresenter) {
 		cvSecondFilm.setVisibility(View.VISIBLE);
-		secondFilmName.setText(films.get(INDEX_SECOND_FILM).getName());
-		secondFilmDescription.setText(films.get(INDEX_SECOND_FILM).getDescription());
-		secondFilmTime.setText(films.get(INDEX_SECOND_FILM).getTime());
+		secondFilmName.setText(times.get(INDEX_SECOND_FILM).getName());
+		secondFilmDescription.setText(times.get(INDEX_SECOND_FILM).getDescription());
+		secondFilmTime.setText(times.get(INDEX_SECOND_FILM).getTime());
 		Picasso
 				.get()
-				.load(films.get(INDEX_SECOND_FILM).getPic())
+				.load(times.get(INDEX_SECOND_FILM).getPic())
 				.fit()
 				.placeholder(R.drawable.ic_car)
 				.into(secondFilmImage);
@@ -84,18 +84,18 @@ class ListDayViewHolder extends RecyclerView.ViewHolder {
 			@Override
 			public void onClick(View v) {
 				//Сообщаем презентеру о нажатии на карточку фильма
-				iListDayPresenter.onFilmClick(films.get(INDEX_SECOND_FILM).getLink());
+				iListDayPresenter.onFilmClick(times.get(INDEX_SECOND_FILM).getLink());
 			}
 		});
 	}
 
-	private void loadFirstFilm(final List<Film> films, final IListDayPresenter iListDayPresenter) {
-		firstFilmName.setText(films.get(INDEX_FIRST_FILM).getName());
-		firstFilmDescription.setText(films.get(INDEX_FIRST_FILM).getDescription());
-		firstFilmTime.setText(films.get(INDEX_FIRST_FILM).getTime());
+	private void loadFirstFilm(final List<Time> times, final IListDayPresenter iListDayPresenter) {
+		firstFilmName.setText(times.get(INDEX_FIRST_FILM).getName());
+		firstFilmDescription.setText(times.get(INDEX_FIRST_FILM).getDescription());
+		firstFilmTime.setText(times.get(INDEX_FIRST_FILM).getTime());
 		Picasso
 				.get()
-				.load(films.get(INDEX_FIRST_FILM).getPic())
+				.load(times.get(INDEX_FIRST_FILM).getPic())
 				.placeholder(R.drawable.ic_car)
 				.fit()
 				.into(firstFilmImage);
@@ -103,7 +103,7 @@ class ListDayViewHolder extends RecyclerView.ViewHolder {
 			@Override
 			public void onClick(View v) {
 				//Сообщаем презентеру о нажатии на карточку фильма
-				iListDayPresenter.onFilmClick(films.get(INDEX_FIRST_FILM).getLink());
+				iListDayPresenter.onFilmClick(times.get(INDEX_FIRST_FILM).getLink());
 			}
 		});
 	}

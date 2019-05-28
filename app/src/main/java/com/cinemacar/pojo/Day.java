@@ -6,14 +6,14 @@ public class Day {
 
 	private String date;
 	private String place;
-	private List<Film> films;
+	private List<Time> times;
 
-	public List<Film> getFilms() {
-		return films;
+	public List<Time> getTimes() {
+		return times;
 	}
 
-	public void setFilms(List<Film> films) {
-		this.films = films;
+	public void setTimes(List<Time> times) {
+		this.times = times;
 	}
 
 
